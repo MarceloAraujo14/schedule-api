@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 @AllArgsConstructor
@@ -43,7 +41,7 @@ public class SaveScheduleServiceImpl implements SaveScheduleService {
 
     private void validateScheduleBeforeNow(ScheduleEntity entity) throws ScheduleBeforeNowException {
         if ((entity.getDate().isEqual(LocalDate.now()) || entity.getDate().isBefore(LocalDate.now()))
-                && entity.getStartAt().isBefore(LocalTime.now())){
+                && LocalDateTime.now().isAfter(LocalDateTime.of(entity.getDate(), entity.getStartAt()))){
             throw new ScheduleBeforeNowException();
         }
     }
