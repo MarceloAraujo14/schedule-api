@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
-class ScheduleControllerTest {
+class ScheduleRequestControllerTest {
 
     @MockBean
     ScheduleServiceImpl service;

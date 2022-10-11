@@ -15,7 +15,10 @@
     - attendantId
     - description
 
-Technologies:
+**feat/001:** 
+  - save a schedule
+
+**Technologies**:
 - Java 11
 - Gradle
 - PostgreSQL
