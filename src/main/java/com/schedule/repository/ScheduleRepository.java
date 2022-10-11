@@ -9,4 +9,6 @@ import java.util.UUID;
 
 public interface ScheduleRepository extends JpaRepository<ScheduleEntity, UUID> {
     List<ScheduleEntity> findAllByDate(LocalDate date);
+
+    List<ScheduleEntity> findAllByDateAndAttendantId(LocalDate date, UUID attendantId);
 }

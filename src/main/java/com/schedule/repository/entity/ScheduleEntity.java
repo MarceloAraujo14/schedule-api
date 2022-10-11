@@ -1,5 +1,6 @@
 package com.schedule.repository.entity;
 
+import com.schedule.model.Schedule;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -42,5 +44,16 @@ public class ScheduleEntity{
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public Schedule getSchedule(){
+        return Schedule.builder()
+                .attendantId(this.scheduleId.toString())
+                .date(this.date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                .startAt(this.startAt.format(DateTimeFormatter.ofPattern("HH:mm")))
+                .endAt(this.endAt.format(DateTimeFormatter.ofPattern("HH:mm")))
+                .attendantId(this.attendantId.toString())
+                .description(this.description)
+                .build();
     }
 }
