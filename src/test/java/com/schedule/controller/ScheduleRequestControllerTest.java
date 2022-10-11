@@ -81,12 +81,12 @@ class ScheduleRequestControllerTest {
         Schedule schedule = getSaveModel();
         Schedule scheduleToUpdate = getUpdatedModel();
 
-        when(service.updateById(schedule.getScheduleId())).thenReturn(scheduleToUpdate);
+        when(service.updateById(schedule)).thenReturn(scheduleToUpdate);
         mockMvc.perform(put("/api/schedule/"+schedule.getScheduleId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.date").value(scheduleToUpdate.getDate()));
 
-        verify(service, times(1)).updateById(schedule.getScheduleId());
+        verify(service, times(1)).updateById(schedule);
     }
 
     @Test

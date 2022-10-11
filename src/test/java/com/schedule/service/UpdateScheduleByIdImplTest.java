@@ -2,6 +2,7 @@ package com.schedule.service;
 
 import com.schedule.model.Schedule;
 import com.schedule.repository.ScheduleRepository;
+import com.schedule.service.exception.ScheduleBeforeNowException;
 import com.schedule.service.exception.ScheduleNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +33,7 @@ class UpdateScheduleByIdImplTest {
     ArgumentCaptor<Schedule> scheduleCaptor;
 
     @Test
-    void should_updateById_success() throws ScheduleNotFoundException {
+    void should_updateById_success() throws ScheduleNotFoundException, ScheduleBeforeNowException {
         Schedule schedule = getSchedule();
         when(findScheduleById.execute(schedule.getScheduleId())).thenReturn(schedule);
         when(saveScheduleService.execute(any())).thenReturn(any());

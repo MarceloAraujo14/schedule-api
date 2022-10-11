@@ -22,14 +22,11 @@ public class SaveScheduleServiceImpl implements SaveScheduleService {
     private final ScheduleRepository repository;
 
     @Override
-    public Schedule execute(Schedule schedule) {
+    public Schedule execute(Schedule schedule) throws ScheduleBeforeNowException {
 
         ScheduleEntity entity = schedule.getEntity();
         validateOverlapTime(entity);
         validateScheduleBeforeNow(entity);
-
-        entity.setCreatedAt(Objects.nonNull(entity.getCreatedAt()) ? entity.getCreatedAt() : LocalDateTime.now());
-        entity.setUpdatedAt(LocalDateTime.now());
 
         repository.save(entity);
         return schedule;
@@ -38,13 +35,13 @@ public class SaveScheduleServiceImpl implements SaveScheduleService {
     private void validateOverlapTime(ScheduleEntity entity){
         List<ScheduleEntity> entities = repository.findAllByDateAndAttendantId(entity.getDate(), entity.getAttendantId());
         entities.forEach(schedule -> {
-            if (schedule.getStartAt().isBefore(entity.getEndAt()) || schedule.getEndAt().isAfter(entity.getStartAt())){
+            if (!schedule.getStartAt().isAfter(entity.getEndAt()) || !schedule.getEndAt().isBefore(entity.getStartAt())){
                 throw new ScheduleOverlapTimeException();
             }
         });
     }
 
-    private void validateScheduleBeforeNow(ScheduleEntity entity){
+    private void validateScheduleBeforeNow(ScheduleEntity entity) throws ScheduleBeforeNowException {
         if ((entity.getDate().isEqual(LocalDate.now()) || entity.getDate().isBefore(LocalDate.now()))
                 && entity.getStartAt().isBefore(LocalTime.now())){
             throw new ScheduleBeforeNowException();

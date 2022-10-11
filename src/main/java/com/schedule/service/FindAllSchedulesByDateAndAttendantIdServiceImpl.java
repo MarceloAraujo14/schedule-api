@@ -3,7 +3,7 @@ package com.schedule.service;
 import com.schedule.model.Schedule;
 import com.schedule.repository.ScheduleRepository;
 import com.schedule.repository.entity.ScheduleEntity;
-import com.schedule.service.interfaces.FindScheduleAllByDateAndAttendantIdService;
+import com.schedule.service.interfaces.FindAllSchedulesByDateAndAttendantIdService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Component
-public class FindScheduleAllByDateAndAttendantIdServiceImpl implements FindScheduleAllByDateAndAttendantIdService {
+public class FindAllSchedulesByDateAndAttendantIdServiceImpl implements FindAllSchedulesByDateAndAttendantIdService {
 
     private final ScheduleRepository repository;
 

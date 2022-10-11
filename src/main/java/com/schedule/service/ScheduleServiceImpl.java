@@ -1,10 +1,10 @@
 package com.schedule.service;
 
 import com.schedule.model.Schedule;
-import com.schedule.service.interfaces.SaveScheduleService;
-import com.schedule.service.interfaces.ScheduleService;
+import com.schedule.service.exception.ScheduleBeforeNowException;
+import com.schedule.service.exception.ScheduleNotFoundException;
+import com.schedule.service.interfaces.*;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,17 +13,20 @@ import java.util.List;
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
 
-    @Autowired
-    private SaveScheduleService saveScheduleService;
+    private final SaveScheduleService saveScheduleService;
+    private final FindScheduleById findScheduleById;
+    private final FindAllSchedulesByDateAndAttendantIdService findAllSchedulesByDateAndAttendantIdService;
+    private final UpdateScheduleById updateScheduleById;
+    private final DeleteScheduleById deleteScheduleById;
 
     @Override
-    public Schedule save(Schedule schedule) {
+    public Schedule save(Schedule schedule) throws ScheduleBeforeNowException {
         return saveScheduleService.execute(schedule);
     }
 
     @Override
-    public Schedule updateById(String scheduleId) {
-        return null;
+    public Schedule updateById(Schedule schedule) throws ScheduleNotFoundException, ScheduleBeforeNowException {
+        return updateScheduleById.execute(schedule);
     }
 
     @Override

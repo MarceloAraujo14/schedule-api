@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.UUID;
 
 @Builder
@@ -41,8 +42,8 @@ public class Schedule {
                 .endAt(LocalTime.parse(endAt, DateTimeFormatter.ofPattern("HH:mm")))
                 .attendantId(UUID.fromString(attendantId))
                 .description(description)
-                .createdAt(LocalDateTime.parse(createdAt))
-                .updatedAt(LocalDateTime.parse(updatedAt))
+                .createdAt(Objects.nonNull(createdAt) ? LocalDateTime.parse(createdAt) : LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 }

@@ -1,6 +1,7 @@
 package com.schedule.service;
 
 import com.schedule.model.Schedule;
+import com.schedule.service.exception.ScheduleBeforeNowException;
 import com.schedule.service.exception.ScheduleNotFoundException;
 import com.schedule.service.interfaces.UpdateScheduleById;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ public class UpdateScheduleByIdImpl implements UpdateScheduleById {
     private final SaveScheduleServiceImpl saveScheduleService;
 
     @Override
-    public Schedule execute(Schedule schedule) throws ScheduleNotFoundException {
+    public Schedule execute(Schedule schedule) throws ScheduleNotFoundException, ScheduleBeforeNowException {
         Schedule updatable = findScheduleById.execute(schedule.getScheduleId());
 
         updatable.setDate(Objects.nonNull(schedule.getDate())? schedule.getDate() : updatable.getDate());

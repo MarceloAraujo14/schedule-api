@@ -34,7 +34,7 @@ class SaveScheduleServiceImplTest {
     ArgumentCaptor<ScheduleEntity> entityCaptor;
 
     @Test
-    void should_save_schedule_success(){
+    void should_save_schedule_success() throws ScheduleBeforeNowException {
         Schedule schedule = getSchedule();
         ScheduleEntity entity = schedule.getEntity();
         when(repository.save(entity)).thenReturn(entity);
