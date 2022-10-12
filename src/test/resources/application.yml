@@ -14,10 +14,10 @@ spring:
       enabled: true
 
   jpa:
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
 
   flyway:
     locations: "db/migration"

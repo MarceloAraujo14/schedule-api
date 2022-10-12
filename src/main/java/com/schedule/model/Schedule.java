@@ -37,9 +37,7 @@ public class Schedule {
     @JsonIgnore
     @ToString.Exclude
     private String createdAt;
-    @JsonIgnore
-    @ToString.Exclude
-    private String updatedAt;
+
 
     @JsonIgnore
     public ScheduleEntity getEntity(){
@@ -51,7 +49,6 @@ public class Schedule {
                 .attendantId(UUID.fromString(attendantId))
                 .description(description)
                 .createdAt(Objects.nonNull(createdAt) ? LocalDateTime.parse(createdAt) : LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
     }
 }

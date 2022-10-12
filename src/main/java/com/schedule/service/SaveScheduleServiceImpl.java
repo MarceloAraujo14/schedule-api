@@ -26,6 +26,7 @@ public class SaveScheduleServiceImpl implements SaveScheduleService {
         validateOverlapTime(entity);
         validateScheduleBeforeNow(entity);
 
+        entity.setUpdatedAt(LocalDateTime.now());
         repository.save(entity);
         return schedule;
     }

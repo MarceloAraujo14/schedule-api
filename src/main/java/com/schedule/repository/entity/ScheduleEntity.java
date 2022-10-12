@@ -55,7 +55,6 @@ public class ScheduleEntity{
                 .attendantId(this.attendantId.toString())
                 .description(this.description)
                 .createdAt(this.createdAt.toString())
-                .updatedAt(this.updatedAt.toString())
                 .build();
     }
 }

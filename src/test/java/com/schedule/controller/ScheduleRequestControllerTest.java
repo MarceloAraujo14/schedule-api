@@ -1,6 +1,5 @@
 package com.schedule.controller;
 
-import com.google.gson.Gson;
 import com.schedule.model.Schedule;
 import com.schedule.service.ScheduleServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -18,8 +17,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
+import static com.schedule.util.TestUtil.objectToJson;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -41,10 +42,10 @@ class ScheduleRequestControllerTest {
     @Test
     void should_save_schedule_success() throws Exception {
         Schedule schedule = getSaveModel();
-        Gson gson = new Gson();
-        String jsonStr = gson.toJson(schedule);
+
+
         when(service.save(schedule)).thenReturn(schedule);
-        mockMvc.perform(post("/api/schedule").contentType(MediaType.APPLICATION_JSON).content(jsonStr))
+        mockMvc.perform(post("/api/schedule").contentType(MediaType.APPLICATION_JSON).content(Objects.requireNonNull(objectToJson(schedule))))
                 .andExpect(status().isOk());
 
         verify(service, times(1)).save(scheduleCaptor.capture());
@@ -78,11 +79,9 @@ class ScheduleRequestControllerTest {
     @Test
     void should_updateById_schedule_success() throws Exception {
         Schedule scheduleToUpdate = getUpdatedModel();
-        Gson gson = new Gson();
-        String jsonStr = gson.toJson(scheduleToUpdate);
 
         when(service.update(scheduleToUpdate)).thenReturn(scheduleToUpdate);
-        mockMvc.perform(put("/api/schedule/").contentType(MediaType.APPLICATION_JSON).content(jsonStr))
+        mockMvc.perform(put("/api/schedule/").contentType(MediaType.APPLICATION_JSON).content(Objects.requireNonNull(objectToJson(scheduleToUpdate))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.date").value(scheduleToUpdate.getDate()));
 

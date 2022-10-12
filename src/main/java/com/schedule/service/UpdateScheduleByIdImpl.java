@@ -25,8 +25,7 @@ public class UpdateScheduleByIdImpl implements UpdateScheduleById {
         updatable.setEndAt(Objects.nonNull(schedule.getEndAt())? schedule.getEndAt() : updatable.getEndAt());
         updatable.setAttendantId(Objects.nonNull(schedule.getAttendantId())? schedule.getAttendantId() : updatable.getAttendantId());
         updatable.setDescription(Objects.nonNull(schedule.getDescription())? schedule.getDescription() : updatable.getDescription());
-        updatable.setCreatedAt(Objects.nonNull(schedule.getCreatedAt())? schedule.getCreatedAt() : updatable.getCreatedAt());
-        updatable.setUpdatedAt(Objects.nonNull(schedule.getUpdatedAt())? schedule.getUpdatedAt() : updatable.getUpdatedAt());
+        updatable.setCreatedAt(schedule.getCreatedAt());
 
         return saveScheduleService.execute(updatable);
     }

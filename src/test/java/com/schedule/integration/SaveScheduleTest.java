@@ -1,7 +1,5 @@
 package com.schedule.integration;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.schedule.model.Schedule;
 import com.schedule.repository.ScheduleRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.UUID;
 
+import static com.schedule.util.TestUtil.objectToJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -57,7 +56,7 @@ class SaveScheduleTest {
 
     @Test
     void should_save_schedule_success() throws Exception {
-        String jsonSchedule = ObjecttoJson(getSchedule());
+        String jsonSchedule = objectToJson(getSchedule());
         System.out.println(jsonSchedule);
         ResultActions scheduleResults = mockMvc.perform(post("/api/schedule")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -72,7 +71,7 @@ class SaveScheduleTest {
 
     @Test
     void should_return_400_when_schedule_same_time() throws Exception {
-        String jsonSchedule = ObjecttoJson(getSchedule());
+        String jsonSchedule = objectToJson(getSchedule());
         System.out.println(jsonSchedule);
         ResultActions scheduleResults = mockMvc.perform(post("/api/schedule")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -102,15 +101,6 @@ class SaveScheduleTest {
                 .attendantId("4418a3af-9008-438f-a17c-ef0fe91d272c")
                 .description("Testing save schedule")
                 .build();
-    }
-
-    private String ObjecttoJson(Object obj){
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
-            fail("Failed to convert object to json");
-            return null;
-        }
     }
 
 }

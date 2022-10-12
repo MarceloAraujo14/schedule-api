@@ -38,8 +38,10 @@ class SaveScheduleServiceImplTest {
         Schedule schedule = getSchedule();
         ScheduleEntity entity = schedule.getEntity();
         when(repository.save(entity)).thenReturn(entity);
+        when(repository.findAllByDateAndAttendantId(schedule.getEntity().getDate(),schedule.getEntity().getAttendantId())).thenReturn(List.of());
         underTest.execute(schedule);
         verify(repository, times(1)).save(entityCaptor.capture());
+        verify(repository, times(1)).findAllByDateAndAttendantId(schedule.getEntity().getDate(),schedule.getEntity().getAttendantId());
         verifyNoMoreInteractions(repository);
     }
 
@@ -62,7 +64,7 @@ class SaveScheduleServiceImplTest {
     private Schedule getSchedule(){
         return Schedule.builder()
                 .scheduleId(UUID.randomUUID().toString())
-                .date(LocalDate.of(2022,10,9).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                .date(LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .startAt(LocalTime.of(10,0).format(DateTimeFormatter.ofPattern("HH:mm")))
                 .endAt(LocalTime.of(10,30).format(DateTimeFormatter.ofPattern("HH:mm")))
                 .attendantId(UUID.randomUUID().toString())
@@ -73,7 +75,7 @@ class SaveScheduleServiceImplTest {
     private Schedule getScheduleOverlap(){
         return Schedule.builder()
                 .scheduleId(UUID.randomUUID().toString())
-                .date(LocalDate.of(2022,10,9).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                .date(LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .startAt(LocalTime.of(10,0).format(DateTimeFormatter.ofPattern("HH:mm")))
                 .endAt(LocalTime.of(10,15).format(DateTimeFormatter.ofPattern("HH:mm")))
                 .attendantId(UUID.randomUUID().toString())
