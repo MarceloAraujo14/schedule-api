@@ -25,22 +25,23 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule updateById(Schedule schedule) throws ScheduleNotFoundException, ScheduleBeforeNowException {
+    public Schedule update(Schedule schedule) throws ScheduleNotFoundException, ScheduleBeforeNowException {
         return updateScheduleById.execute(schedule);
     }
 
     @Override
-    public Schedule findById(String scheduleId) {
-        return null;
+    public Schedule findById(String scheduleId) throws ScheduleNotFoundException {
+        return findScheduleById.execute(scheduleId);
     }
 
     @Override
-    public List<Schedule> findAllByDate(String date) {
-        return null;
+    public List<Schedule> findAllByDateAndAttendantId(String date, String attendantId) {
+        return findAllSchedulesByDateAndAttendantIdService.execute(date, attendantId);
     }
 
     @Override
     public void deleteById(String scheduleId) {
+        deleteScheduleById.execute(scheduleId);
     }
 
 }

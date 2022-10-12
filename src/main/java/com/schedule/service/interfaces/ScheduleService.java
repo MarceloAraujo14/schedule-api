@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ScheduleService {
     Schedule save(Schedule schedule) throws ScheduleBeforeNowException;
-    Schedule updateById(Schedule schedule) throws ScheduleNotFoundException, ScheduleBeforeNowException;
-    Schedule findById(String scheduleId);
-    List<Schedule> findAllByDate(String date);
+    Schedule update(Schedule schedule) throws ScheduleNotFoundException, ScheduleBeforeNowException;
+    Schedule findById(String scheduleId) throws ScheduleNotFoundException;
+    List<Schedule> findAllByDateAndAttendantId(String date, String attendantId);
     void deleteById(String scheduleId);
 
 }

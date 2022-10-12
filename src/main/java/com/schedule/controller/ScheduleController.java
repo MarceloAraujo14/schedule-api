@@ -21,18 +21,18 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public ResponseEntity findAllByDate(@RequestParam("date") String date){
-        return ResponseEntity.ok(scheduleServiceImpl.findAllByDate(date));
+    public ResponseEntity findAllByDateAndAttendantId(@RequestParam("date") String date, @RequestParam("attendantId") String attendantId){
+        return ResponseEntity.ok(scheduleServiceImpl.findAllByDateAndAttendantId(date, attendantId));
     }
 
     @GetMapping("/{scheduleId}")
-    public ResponseEntity findById(@PathVariable("scheduleId") String scheduleId){
+    public ResponseEntity findById(@PathVariable("scheduleId") String scheduleId) throws ScheduleNotFoundException {
         return ResponseEntity.ok(scheduleServiceImpl.findById(scheduleId));
     }
 
     @PutMapping
     public ResponseEntity updateById(@RequestBody Schedule schedule) throws ScheduleNotFoundException, ScheduleBeforeNowException {
-        return ResponseEntity.ok(scheduleServiceImpl.updateById(schedule));
+        return ResponseEntity.ok(scheduleServiceImpl.update(schedule));
     }
 
     @DeleteMapping("/{scheduleId}")

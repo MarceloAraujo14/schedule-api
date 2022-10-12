@@ -1,6 +1,5 @@
 package com.schedule.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.schedule.model.Schedule;
 import com.schedule.service.ScheduleServiceImpl;
@@ -14,7 +13,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,7 +44,7 @@ class ScheduleRequestControllerTest {
         Gson gson = new Gson();
         String jsonStr = gson.toJson(schedule);
         when(service.save(schedule)).thenReturn(schedule);
-        ResultActions resultActions = mockMvc.perform(post("/api/schedule").contentType(MediaType.APPLICATION_JSON).content(jsonStr))
+        mockMvc.perform(post("/api/schedule").contentType(MediaType.APPLICATION_JSON).content(jsonStr))
                 .andExpect(status().isOk());
 
         verify(service, times(1)).save(scheduleCaptor.capture());
@@ -56,12 +54,13 @@ class ScheduleRequestControllerTest {
     void should_getAllByDate_schedule_success() throws Exception {
         Schedule schedule = getSaveModel();
 
-        when(service.findAllByDate(schedule.getDate())).thenReturn(List.of(schedule));
-        mockMvc.perform(get("/api/schedule?date="+schedule.getDate()))
+        when(service.findAllByDateAndAttendantId(schedule.getDate(), schedule.getAttendantId())).thenReturn(List.of(schedule));
+        String url = String.format("/api/schedule?date=%s&attendantId=%s", schedule.getDate(), schedule.getAttendantId());
+        mockMvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].scheduleId").value(schedule.getScheduleId()));
 
-        verify(service, times(1)).findAllByDate(schedule.getDate());
+        verify(service, times(1)).findAllByDateAndAttendantId(schedule.getDate(), schedule.getAttendantId());
     }
 
     @Test
@@ -80,13 +79,15 @@ class ScheduleRequestControllerTest {
     void should_updateById_schedule_success() throws Exception {
         Schedule schedule = getSaveModel();
         Schedule scheduleToUpdate = getUpdatedModel();
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(scheduleToUpdate);
 
-        when(service.updateById(schedule)).thenReturn(scheduleToUpdate);
-        mockMvc.perform(put("/api/schedule/"+schedule.getScheduleId()))
+        when(service.update(scheduleToUpdate)).thenReturn(scheduleToUpdate);
+        mockMvc.perform(put("/api/schedule/").contentType(MediaType.APPLICATION_JSON).content(jsonStr))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.date").value(scheduleToUpdate.getDate()));
 
-        verify(service, times(1)).updateById(schedule);
+        verify(service, times(1)).update(scheduleToUpdate);
     }
 
     @Test
@@ -102,9 +103,9 @@ class ScheduleRequestControllerTest {
     private Schedule getSaveModel(){
         return Schedule.builder()
                 .scheduleId(UUID.randomUUID().toString())
-                .date(LocalDate.of(2022,10,9).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
-                .startAt(LocalTime.of(10,0).format(DateTimeFormatter.ofPattern("HH:mm")))
-                .endAt(LocalTime.of(10,15).format(DateTimeFormatter.ofPattern("HH:mm")))
+                .date(LocalDate.now().plusWeeks(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                .startAt(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")))
+                .endAt(LocalTime.now().plusMinutes(15).format(DateTimeFormatter.ofPattern("HH:mm")))
                 .attendantId(UUID.randomUUID().toString())
                 .description("Descritption")
                 .build();
@@ -113,9 +114,9 @@ class ScheduleRequestControllerTest {
     private Schedule getUpdatedModel(){
         return Schedule.builder()
                 .scheduleId(UUID.randomUUID().toString())
-                .date(LocalDate.of(2022,10,14).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                .date(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .startAt(LocalTime.of(10,0).format(DateTimeFormatter.ofPattern("HH:mm")))
-                .endAt(LocalTime.of(10,15).format(DateTimeFormatter.ofPattern("HH:mm")))
+                .endAt(LocalTime.of(10,30).format(DateTimeFormatter.ofPattern("HH:mm")))
                 .attendantId(UUID.randomUUID().toString())
                 .description("Descritption")
                 .build();
