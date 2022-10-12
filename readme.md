@@ -18,7 +18,7 @@
 **feat/001:** 
   - save a schedule
   - update schedule
-  - find all by date
+  - find all by date and attendant id
   - find by id
 
 **Technologies**:

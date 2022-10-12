@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Builder
 @Entity
-@Table(name = "schedule_tb")
+@Table(name = "schedule")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -48,12 +48,14 @@ public class ScheduleEntity{
 
     public Schedule getSchedule(){
         return Schedule.builder()
-                .attendantId(this.scheduleId.toString())
+                .scheduleId(this.scheduleId.toString())
                 .date(this.date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .startAt(this.startAt.format(DateTimeFormatter.ofPattern("HH:mm")))
                 .endAt(this.endAt.format(DateTimeFormatter.ofPattern("HH:mm")))
                 .attendantId(this.attendantId.toString())
                 .description(this.description)
+                .createdAt(this.createdAt.toString())
+                .updatedAt(this.updatedAt.toString())
                 .build();
     }
 }

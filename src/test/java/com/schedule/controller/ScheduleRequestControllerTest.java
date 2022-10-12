@@ -77,7 +77,6 @@ class ScheduleRequestControllerTest {
 
     @Test
     void should_updateById_schedule_success() throws Exception {
-        Schedule schedule = getSaveModel();
         Schedule scheduleToUpdate = getUpdatedModel();
         Gson gson = new Gson();
         String jsonStr = gson.toJson(scheduleToUpdate);

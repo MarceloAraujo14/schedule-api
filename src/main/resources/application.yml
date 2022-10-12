@@ -2,8 +2,9 @@
 server:
   port: 8080
 
-#Database Conf
 spring:
+
+#Database Conf
   datasource:
     url: jdbc:postgresql://localhost:15432/schedule?currentSchema=public
     username: "admin"
