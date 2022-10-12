@@ -1,0 +1,27 @@
+server:
+  port: ${SERVER_PORT}
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  #Database Conf
+  datasource:
+    url: jdbc:postgresql://postgres-db:5432/schedule?currentSchema=public
+    username: "admin"
+    password: "admin"
+    driver-class-name: "org.postgresql.Driver"
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    locations: "db/migration"
+    baseline-on-migrate: false
+
+springdoc:
+  swagger-ui:
+    path: "/schedule/swagger-ui.html"
