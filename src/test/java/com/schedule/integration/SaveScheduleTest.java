@@ -91,7 +91,6 @@ class SaveScheduleTest {
         sameTimeResult.andExpect(status().isBadRequest())
                 .andExpect(content().string("The chosen time is already booked."));
 
-
     }
 
     Schedule getSchedule() {
