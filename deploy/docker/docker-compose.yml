@@ -32,9 +32,9 @@ services:
     container_name: schedule-api
     image: docker.io/library/schedule-api:latest
     ports:
-      - "8080:8080"
+      - "8090:80"
     environment:
-      SERVER_PORT: 8080
+      SERVER_PORT: 8090
       SPRING_PROFILES_ACTIVE: dev
       TZ: "America/Sao_Paulo"
     depends_on:
