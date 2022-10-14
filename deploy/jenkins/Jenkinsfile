@@ -23,7 +23,7 @@ pipeline {
                 sh './gradlew :bootBuildImage'
             }
         }
-        stage('buildImage') {
+        stage('deploy') {
             steps {
                 sh 'cd deploy/docker'
                 sh 'docker-compose up -d'
