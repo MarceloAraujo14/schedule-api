@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     stages {
@@ -12,9 +13,20 @@ pipeline {
                 sh './gradlew test'
             }
         }
-        stage('deploy') {
+        stage('build') {
             steps {
-                sh 'echo "deploy"'
+                sh './gradlew build'
+            }
+        }
+        stage('buildImage') {
+            steps {
+                sh './gradlew :bootBuildImage'
+            }
+        }
+        stage('buildImage') {
+            steps {
+                sh 'cd deploy/docker'
+                sh 'docker-compose up -d'
             }
         }
     }
