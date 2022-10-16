@@ -30,7 +30,7 @@ services:
 
   schedule-api:
     container_name: schedule-api
-    image: docker.io/library/schedule-api:latest
+    image: marceloaraujo14/schedule-api:latest
     ports:
       - "8090:80"
     environment:
