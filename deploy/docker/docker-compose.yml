@@ -41,6 +41,12 @@ services:
       - postgres-db
     networks:
       - pg-db-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 512M
 
 networks:
   pg-db-network:
