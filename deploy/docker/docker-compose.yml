@@ -44,9 +44,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512M
+          memory: 7002M
         reservations:
-          memory: 512M
+          memory: 700M
 
 networks:
   pg-db-network:
