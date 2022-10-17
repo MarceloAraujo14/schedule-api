@@ -1,7 +1,7 @@
 #!/bin/bash
 
 def branch = $selectBranch
-def enviroment = $enviroment
+def enviroment = $deploy_env
 
 pipeline {
     agent any
@@ -12,13 +12,16 @@ pipeline {
                 sh "git checkout \"$branch\""
                 sh "echo \"$branch\""
 
-                if($enviroment == 'LOCAL'){
-                sh "echo LOCAL";
-                }else if($enviroment == 'DOCKER'){
-                sh "echo DOCKER"
-                }else {
-                sh "echo AWS"
+                script {
+                    if($enviroment == 'LOCAL'){
+                        sh "echo LOCAL";
+                    }else if($enviroment == 'DOCKER'){
+                        sh "echo DOCKER"
+                    }else {
+                        sh "echo AWS"
+                    }
                 }
+
             }
         }
         stage('clean') {
