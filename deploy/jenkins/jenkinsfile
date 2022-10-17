@@ -10,7 +10,7 @@ pipeline {
     stages{
         stage('Enviroment'){
             steps{
-                sh "echo ./deploy/jenkins/\"$deploy\"/jenkinsfile"
+                load "./deploy/jenkins/\"$deploy\"/jenkinsfile"
             }
         }
     }
