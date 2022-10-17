@@ -14,19 +14,19 @@ services:
     networks:
       - pg-db-network
 
-#  pgadmin:
-#    container_name: pgadmin
-#    image: dpage/pgadmin4
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
-#      PGADMIN_DEFAULT_PASSWORD: "admin"
-#      TZ: "America/Sao_Paulo"
-#    ports:
-#      - "16543:80"
-#    depends_on:
-#      - postgres-db
-#    networks:
-#      - pg-db-network
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+      TZ: "America/Sao_Paulo"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres-db
+    networks:
+      - pg-db-network
 
   schedule-api:
     container_name: schedule-api
@@ -41,12 +41,6 @@ services:
       - postgres-db
     networks:
       - pg-db-network
-    deploy:
-      resources:
-        limits:
-          memory: 7002M
-        reservations:
-          memory: 700M
 
 networks:
   pg-db-network:

@@ -5,10 +5,12 @@ import com.schedule.service.exception.ScheduleBeforeNowException;
 import com.schedule.service.exception.ScheduleNotFoundException;
 import com.schedule.service.interfaces.UpdateScheduleById;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+@Log4j2
 @Component
 @AllArgsConstructor
 public class UpdateScheduleByIdImpl implements UpdateScheduleById {
@@ -18,6 +20,7 @@ public class UpdateScheduleByIdImpl implements UpdateScheduleById {
 
     @Override
     public Schedule execute(Schedule schedule) throws ScheduleNotFoundException, ScheduleBeforeNowException {
+        log.info("M execute, request={}", schedule);
         Schedule updatable = findScheduleById.execute(schedule.getScheduleId());
 
         updatable.setDate(Objects.nonNull(schedule.getDate())? schedule.getDate() : updatable.getDate());
