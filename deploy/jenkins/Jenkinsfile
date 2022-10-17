@@ -1,17 +1,14 @@
-#!/usr/bin/env groovy
+#!/bin/bash
 pipeline {
     agent any
-    parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-      }
-      stages {
-        stage('Example') {
-          steps {
-            git branch: "${params.BRANCH}", url: 'https://github.com/MarceloAraujo14/schedule-api.git'
-          }
-        }
-      }
+
     stages {
+        stage('checkout') {
+            steps {
+                sh 'chmod +x gradlew'
+                sh 'git checkout $selectBranch'
+            }
+        }
         stage('clean') {
             steps {
                 sh 'chmod +x gradlew'
