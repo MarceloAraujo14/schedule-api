@@ -1,13 +1,10 @@
 #!/bin/bash
 pipeline {
     agent any
-
     stages{
-
         stage('checkout') {
             steps {
-                def branch = '$selectBranch'
-                def enviroment = '$enviroment'
+
                 sh "git checkout \"$branch\""
                 sh "echo \"$branch\""
 
