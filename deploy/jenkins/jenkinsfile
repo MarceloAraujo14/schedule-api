@@ -1,9 +1,10 @@
 #!/bin/bash
 pipeline {
     agent any
-
+    script{
     def branch = '$selectBranch'
     def enviroment = '$enviroment'
+    }
     stages {
         stage('checkout') {
             steps {
