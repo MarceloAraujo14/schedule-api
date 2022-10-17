@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                sh 'chmod +x gradlew'
                 sh 'git checkout $selectBranch'
+                sh 'echo $selectBranch'
             }
         }
         stage('clean') {
