@@ -2,12 +2,15 @@
 pipeline {
     agent any
 
+    stages{
+
         stage('checkout') {
             steps {
                 def branch = '$selectBranch'
                 def enviroment = '$enviroment'
                 sh "git checkout \"$branch\""
                 sh "echo \"$branch\""
+
                 if($enviroment == 'LOCAL'){
                 sh "echo LOCAL";
                 }else if($enviroment == 'DOCKER'){
@@ -15,7 +18,6 @@ pipeline {
                 }else {
                 sh "echo AWS"
                 }
-
             }
         }
         stage('clean') {
