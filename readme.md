@@ -33,6 +33,10 @@
 - Spring Validation
 
 
+**AWS diagram**
+
+<img src=diagram/aws-diagram.jpg>
+
 Design
 - MVC architecture
 - TDD
