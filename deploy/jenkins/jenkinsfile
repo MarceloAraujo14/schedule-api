@@ -7,9 +7,10 @@ pipeline {
          branch = '$selectBranch'
          deploy = '$deployEnv'
     }
-
-    stage{
-        sh "echo ./\"$deploy\"/jenkinsfile"
+    stages{
+        stage{
+            sh "echo ./\"$deploy\"/jenkinsfile"
+        }
     }
 
 }
