@@ -1,4 +1,8 @@
 #!/bin/bash
+
+def branch = $selectBranch
+def enviroment = $enviroment
+
 pipeline {
     agent any
     stages{
