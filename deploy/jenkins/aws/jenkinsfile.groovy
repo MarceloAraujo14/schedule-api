@@ -32,17 +32,9 @@
                      sh './gradlew build'
                  }
              }
-             stage('buildImage') {
+             stage('deploy ec2') {
                  steps {
-         //                 sh './gradlew :bootBuildImage'
-                         sh "echo 'buildando imagem'"
-                 }
-             }
-             stage('deploy') {
-                 steps {
-                         sh "echo fazendo deploy"
-         //                 sh 'cd deploy/docker'
-         //                 sh 'docker-compose up -d'
+                         cat "deploy/terraform/main.tf"
                  }
              }
      }
