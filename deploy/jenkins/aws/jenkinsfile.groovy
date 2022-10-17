@@ -34,7 +34,8 @@
              }
              stage('deploy ec2') {
                  steps {
-                         sh "cat deploy/terraform/main.tf"
+                     sh "cd deploy/terraform/"
+                     sh "terraform apply --auto-approve"
                  }
              }
      }
