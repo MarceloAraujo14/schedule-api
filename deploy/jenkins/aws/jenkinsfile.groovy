@@ -34,7 +34,7 @@
              }
              stage('deploy ec2') {
                  steps {
-                         cat "deploy/terraform/main.tf"
+                         sh "cat deploy/terraform/main.tf"
                  }
              }
      }
