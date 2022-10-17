@@ -10,7 +10,7 @@ pipeline {
     stages{
         stage('Enviroment'){
             steps{
-                load "jenkins/\"$deploy\"/jenkinsfile"
+                load "deploy/jenkins/\"$deployEnv\"/jenkinsfile"
             }
         }
     }
