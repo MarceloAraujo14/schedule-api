@@ -1,13 +1,7 @@
-#!/bin/bash
+#!groovy
 
-pipeline {
-    agent any
-
-    stages{
-        stage('Enviroment'){
-            steps{
-                load "deploy/jenkins/$deployEnv/jenkinsfile"
-            }
-        }
-    }
+node {
+   checkout scm
+   def base = load "deploy/jenkins/$deployEnv/jenkinsfile"
+   base.startPipe()
 }
