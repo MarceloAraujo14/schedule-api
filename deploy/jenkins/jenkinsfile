@@ -3,14 +3,10 @@
 pipeline {
     agent any
 
-    environment {
-         branch = '$selectBranch'
-         deploy = '$deployEnv'
-    }
     stages{
         stage('Enviroment'){
             steps{
-                load "deploy/jenkins/\"$deployEnv\"/jenkinsfile"
+                load "deploy/jenkins/$deployEnv/jenkinsfile"
             }
         }
     }
