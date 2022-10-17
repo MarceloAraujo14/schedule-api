@@ -34,7 +34,8 @@
              }
              stage('deploy') {
                  steps {
-                         sh "./gradlew :bootRun"
+                     sh "docker-compose -f ./deploy/docker/docker-compose-docker.yml up -d"
+                     sh "./gradlew :bootRun"
                  }
              }
      }

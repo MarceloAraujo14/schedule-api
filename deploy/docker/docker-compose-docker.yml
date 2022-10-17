@@ -28,6 +28,20 @@ services:
     networks:
       - pg-db-network
 
+  schedule-api:
+    container_name: schedule-api
+    image: marceloaraujo14/schedule-api:latest
+    ports:
+      - "8090:80"
+    environment:
+      SERVER_PORT: 8090
+      SPRING_PROFILES_ACTIVE: dev
+      TZ: "America/Sao_Paulo"
+    depends_on:
+      - postgres-db
+    networks:
+      - pg-db-network
+
 networks:
   pg-db-network:
     driver: bridge
