@@ -4,8 +4,8 @@ pipeline {
 
         stage('checkout') {
             steps {
-                String branch = '$selectBranch'
-                String enviroment = '$enviroment'
+                def branch = '$selectBranch'
+                def enviroment = '$enviroment'
                 sh "git checkout \"$branch\""
                 sh "echo \"$branch\""
                 if($enviroment == 'LOCAL'){
