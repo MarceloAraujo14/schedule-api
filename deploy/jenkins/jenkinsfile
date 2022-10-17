@@ -2,9 +2,8 @@
 pipeline {
     agent any
 
-    String branch = '$selectBranch'
-    String enviroment = '$enviroment'
-
+    def branch = '$selectBranch'
+    def enviroment = '$enviroment'
     stages {
         stage('checkout') {
             steps {
