@@ -2,12 +2,15 @@
 pipeline {
     agent any
 
+    branch = '$selectBranch'
+    enviroment = '$enviroment'
+
     stages {
         stage('checkout') {
             steps {
-                sh 'git checkout $selectBranch'
-                sh 'echo $selectBranch'
-                sh 'echo $enviroment'
+                sh "git checkout \"$branch\""
+                sh "echo \"$branch\""
+                sh "echo \"$enviroment\""
             }
         }
         stage('clean') {
