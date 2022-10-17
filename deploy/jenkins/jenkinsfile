@@ -1,13 +1,13 @@
 #!/bin/bash
 
-enviroment {
-     branch = '$selectBranch'
-     env = '$deployEnv'
-}
-
-
 pipeline {
     agent any
+
+    enviroment {
+         branch = '$selectBranch'
+         env = '$deployEnv'
+    }
+
     stages{
         stage('checkout') {
             steps {
