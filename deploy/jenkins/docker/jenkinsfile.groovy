@@ -1,7 +1,7 @@
 #!groovy
 
 def startPipe(){
-    sh "$selectBranch"
+    sh "echo $selectBranch"
 }
 // pipeline {
 //     agent none

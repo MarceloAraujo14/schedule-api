@@ -1,7 +1,0 @@
-#!groovy
-
-node {
-   checkout scm
-   def base = load "deploy/jenkins/$deployEnv/jenkinsfile"
-   base.startPipe()
-}
