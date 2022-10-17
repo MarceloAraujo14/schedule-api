@@ -8,8 +8,10 @@ pipeline {
          deploy = '$deployEnv'
     }
     stages{
-        stage{
-            sh "echo ./\"$deploy\"/jenkinsfile"
+        stage('Enviroment'){
+            steps{
+                sh "echo ./\"$deploy\"/jenkinsfile"
+            }
         }
     }
 
