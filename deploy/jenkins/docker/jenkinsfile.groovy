@@ -1,8 +1,5 @@
 #!/bin/bash
 
-def startPipe(){
-    sh "echo $selectBranch"
-}
  pipeline {
      agent any
 
