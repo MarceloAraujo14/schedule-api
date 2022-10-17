@@ -10,7 +10,14 @@ pipeline {
             steps {
                 sh "git checkout \"$branch\""
                 sh "echo \"$branch\""
-                sh "echo \"$enviroment\""
+                if($enviroment == 'LOCAL'){
+                sh "echo LOCAL";
+                }else if($enviroment == 'DOCKER'){
+                sh "echo DOCKER"
+                }else {
+                sh "echo AWS"
+                }
+
             }
         }
         stage('clean') {
