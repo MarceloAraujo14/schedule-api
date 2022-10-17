@@ -2,13 +2,12 @@
 pipeline {
     agent any
 
-
+    String branch = '$selectBranch'
+    String enviroment = '$enviroment'
 
     stages {
         stage('checkout') {
             steps {
-                branch = '$selectBranch'
-                enviroment = '$enviroment'
                 sh "git checkout \"$branch\""
                 sh "echo \"$branch\""
                 if($enviroment == 'LOCAL'){
