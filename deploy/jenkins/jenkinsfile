@@ -27,13 +27,15 @@ pipeline {
         }
         stage('buildImage') {
             steps {
-                sh './gradlew :bootBuildImage'
+//                 sh './gradlew :bootBuildImage'
+                    sh "echo 'buildando imagem'"
             }
         }
         stage('deploy') {
             steps {
-                sh 'cd deploy/docker'
-                sh 'docker-compose up -d'
+                    sh "echo fazendo deploy"
+//                 sh 'cd deploy/docker'
+//                 sh 'docker-compose up -d'
             }
         }
     }
