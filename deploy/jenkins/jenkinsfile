@@ -5,13 +5,13 @@ pipeline {
 
     environment {
          branch = '$selectBranch'
-         env = '$deployEnv'
+         deploy_to = '$deployEnv'
     }
 
     stages{
         stage('checkout') {
             steps {
-                sh "echo enviroment \"$env\""
+                sh "echo enviroment \"$deployEnv\""
                 sh "git checkout \"$branch\""
                 sh "echo \"$branch\""
             }
