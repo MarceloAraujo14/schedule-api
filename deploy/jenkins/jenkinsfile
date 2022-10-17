@@ -10,7 +10,7 @@ pipeline {
     stages{
         stage('Enviroment'){
             steps{
-                cat "./deploy/jenkins/\"$deploy\"/jenkinsfile"
+                load "deploy/jenkins/\"$deploy\"/jenkinsfile"
             }
         }
     }

@@ -1,7 +1,12 @@
 #!/bin/bash
 
 pipeline {
-    agent any
+    agent none
+
+    environment {
+             branch = '$selectBranch'
+             deploy = '$deployEnv'
+        }
 
         stages {
             stage('checkout') {
