@@ -1,7 +1,7 @@
 #!/bin/bash
 
  pipeline {
-     agent any
+     agent {docker { image 'node:16-alpine'}}
 
      environment {
               branch = '$selectBranch'
