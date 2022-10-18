@@ -32,10 +32,14 @@
 //                     sh './gradlew build'
 //                 }
 //             }
-             stage('deploy') {
+             stage('docker compose') {
                  steps {
-                     sh "docker compose -f ./deploy/docker/docker-compose-docker.yml up -d"
-//                     sh "./gradlew :bootRun"
+                     sh '''
+                        cd env-ci/
+                        docker-compose --version
+                        docker --version
+                        docker info
+                        '''
                  }
              }
      }
