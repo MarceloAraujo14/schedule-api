@@ -35,7 +35,6 @@
              stage('docker compose') {
                  steps {
                      sh '''
-                        cd env-ci/
                         docker-compose --version
                         docker --version
                         docker info
